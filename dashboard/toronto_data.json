@@ -1,0 +1,1902 @@
+[
+  {
+    "postcode": "M4E",
+    "borough": "East Toronto",
+    "neighborhood": "The Beaches",
+    "lat": 43.6763574,
+    "lng": -79.2930312,
+    "cluster": 0,
+    "venues": [
+      {
+        "name": "Health Food Store",
+        "freq": 0.25
+      },
+      {
+        "name": "Pub",
+        "freq": 0.25
+      },
+      {
+        "name": "Trail",
+        "freq": 0.25
+      },
+      {
+        "name": "Noodle House",
+        "freq": 0.0
+      },
+      {
+        "name": "Mediterranean Restaurant",
+        "freq": 0.0
+      },
+      {
+        "name": "Men's Store",
+        "freq": 0.0
+      },
+      {
+        "name": "Mexican Restaurant",
+        "freq": 0.0
+      },
+      {
+        "name": "Middle Eastern Restaurant",
+        "freq": 0.0
+      },
+      {
+        "name": "Miscellaneous Shop",
+        "freq": 0.0
+      },
+      {
+        "name": "Modern European Restaurant",
+        "freq": 0.0
+      }
+    ]
+  },
+  {
+    "postcode": "M4K",
+    "borough": "East Toronto",
+    "neighborhood": "The Danforth West, Riverdale",
+    "lat": 43.6795571,
+    "lng": -79.352188,
+    "cluster": 0,
+    "venues": [
+      {
+        "name": "Greek Restaurant",
+        "freq": 0.2
+      },
+      {
+        "name": "Coffee Shop",
+        "freq": 0.09
+      },
+      {
+        "name": "Italian Restaurant",
+        "freq": 0.07
+      },
+      {
+        "name": "Ice Cream Shop",
+        "freq": 0.05
+      },
+      {
+        "name": "Bookstore",
+        "freq": 0.05
+      },
+      {
+        "name": "Furniture / Home Store",
+        "freq": 0.05
+      },
+      {
+        "name": "Yoga Studio",
+        "freq": 0.02
+      },
+      {
+        "name": "Cosmetics Shop",
+        "freq": 0.02
+      },
+      {
+        "name": "Brewery",
+        "freq": 0.02
+      },
+      {
+        "name": "Bubble Tea Shop",
+        "freq": 0.02
+      }
+    ]
+  },
+  {
+    "postcode": "M4L",
+    "borough": "East Toronto",
+    "neighborhood": "The Beaches West, India Bazaar",
+    "lat": 43.6689985,
+    "lng": -79.3155716,
+    "cluster": 0,
+    "venues": [
+      {
+        "name": "Pizza Place",
+        "freq": 0.06
+      },
+      {
+        "name": "Italian Restaurant",
+        "freq": 0.06
+      },
+      {
+        "name": "Fish & Chips Shop",
+        "freq": 0.06
+      },
+      {
+        "name": "Fast Food Restaurant",
+        "freq": 0.06
+      },
+      {
+        "name": "Burger Joint",
+        "freq": 0.06
+      },
+      {
+        "name": "Burrito Place",
+        "freq": 0.06
+      },
+      {
+        "name": "Liquor Store",
+        "freq": 0.06
+      },
+      {
+        "name": "Movie Theater",
+        "freq": 0.06
+      },
+      {
+        "name": "Steakhouse",
+        "freq": 0.06
+      },
+      {
+        "name": "Sandwich Place",
+        "freq": 0.06
+      }
+    ]
+  },
+  {
+    "postcode": "M4M",
+    "borough": "East Toronto",
+    "neighborhood": "Studio District",
+    "lat": 43.6595255,
+    "lng": -79.340923,
+    "cluster": 0,
+    "venues": [
+      {
+        "name": "Caf\u00e9",
+        "freq": 0.1
+      },
+      {
+        "name": "Coffee Shop",
+        "freq": 0.08
+      },
+      {
+        "name": "Bakery",
+        "freq": 0.05
+      },
+      {
+        "name": "Italian Restaurant",
+        "freq": 0.05
+      },
+      {
+        "name": "American Restaurant",
+        "freq": 0.05
+      },
+      {
+        "name": "Yoga Studio",
+        "freq": 0.03
+      },
+      {
+        "name": "Seafood Restaurant",
+        "freq": 0.03
+      },
+      {
+        "name": "Stationery Store",
+        "freq": 0.03
+      },
+      {
+        "name": "Bookstore",
+        "freq": 0.03
+      },
+      {
+        "name": "Middle Eastern Restaurant",
+        "freq": 0.03
+      }
+    ]
+  },
+  {
+    "postcode": "M4N",
+    "borough": "Central Toronto",
+    "neighborhood": "Lawrence Park",
+    "lat": 43.7280205,
+    "lng": -79.3887901,
+    "cluster": 4,
+    "venues": [
+      {
+        "name": "Photography Studio",
+        "freq": 0.25
+      },
+      {
+        "name": "Park",
+        "freq": 0.25
+      },
+      {
+        "name": "Swim School",
+        "freq": 0.25
+      },
+      {
+        "name": "Bus Line",
+        "freq": 0.25
+      },
+      {
+        "name": "New American Restaurant",
+        "freq": 0.0
+      },
+      {
+        "name": "Nightclub",
+        "freq": 0.0
+      },
+      {
+        "name": "Men's Store",
+        "freq": 0.0
+      },
+      {
+        "name": "Mexican Restaurant",
+        "freq": 0.0
+      },
+      {
+        "name": "Middle Eastern Restaurant",
+        "freq": 0.0
+      },
+      {
+        "name": "Miscellaneous Shop",
+        "freq": 0.0
+      }
+    ]
+  },
+  {
+    "postcode": "M4P",
+    "borough": "Central Toronto",
+    "neighborhood": "Davisville North",
+    "lat": 43.7127511,
+    "lng": -79.3901975,
+    "cluster": 0,
+    "venues": [
+      {
+        "name": "Hotel",
+        "freq": 0.2
+      },
+      {
+        "name": "Food & Drink Shop",
+        "freq": 0.1
+      },
+      {
+        "name": "Park",
+        "freq": 0.1
+      },
+      {
+        "name": "Breakfast Spot",
+        "freq": 0.1
+      },
+      {
+        "name": "Gym / Fitness Center",
+        "freq": 0.1
+      },
+      {
+        "name": "Gym",
+        "freq": 0.1
+      },
+      {
+        "name": "Sandwich Place",
+        "freq": 0.1
+      },
+      {
+        "name": "Dance Studio",
+        "freq": 0.1
+      },
+      {
+        "name": "Clothing Store",
+        "freq": 0.1
+      },
+      {
+        "name": "Music Venue",
+        "freq": 0.0
+      }
+    ]
+  },
+  {
+    "postcode": "M4R",
+    "borough": "Central Toronto",
+    "neighborhood": "North Toronto West",
+    "lat": 43.7153834,
+    "lng": -79.4056784,
+    "cluster": 0,
+    "venues": [
+      {
+        "name": "Coffee Shop",
+        "freq": 0.09
+      },
+      {
+        "name": "Sporting Goods Shop",
+        "freq": 0.09
+      },
+      {
+        "name": "Clothing Store",
+        "freq": 0.09
+      },
+      {
+        "name": "Yoga Studio",
+        "freq": 0.05
+      },
+      {
+        "name": "Mexican Restaurant",
+        "freq": 0.05
+      },
+      {
+        "name": "Burger Joint",
+        "freq": 0.05
+      },
+      {
+        "name": "Spa",
+        "freq": 0.05
+      },
+      {
+        "name": "Caf\u00e9",
+        "freq": 0.05
+      },
+      {
+        "name": "Salon / Barbershop",
+        "freq": 0.05
+      },
+      {
+        "name": "Furniture / Home Store",
+        "freq": 0.05
+      }
+    ]
+  },
+  {
+    "postcode": "M4S",
+    "borough": "Central Toronto",
+    "neighborhood": "Davisville",
+    "lat": 43.7043244,
+    "lng": -79.3887901,
+    "cluster": 0,
+    "venues": [
+      {
+        "name": "Dessert Shop",
+        "freq": 0.09
+      },
+      {
+        "name": "Sandwich Place",
+        "freq": 0.09
+      },
+      {
+        "name": "Pizza Place",
+        "freq": 0.06
+      },
+      {
+        "name": "Caf\u00e9",
+        "freq": 0.06
+      },
+      {
+        "name": "Italian Restaurant",
+        "freq": 0.06
+      },
+      {
+        "name": "Gym",
+        "freq": 0.06
+      },
+      {
+        "name": "Coffee Shop",
+        "freq": 0.06
+      },
+      {
+        "name": "Sushi Restaurant",
+        "freq": 0.06
+      },
+      {
+        "name": "Gourmet Shop",
+        "freq": 0.03
+      },
+      {
+        "name": "Brewery",
+        "freq": 0.03
+      }
+    ]
+  },
+  {
+    "postcode": "M4T",
+    "borough": "Central Toronto",
+    "neighborhood": "Moore Park, Summerhill East",
+    "lat": 43.6895743,
+    "lng": -79.3831599,
+    "cluster": 1,
+    "venues": [
+      {
+        "name": "Playground",
+        "freq": 1.0
+      },
+      {
+        "name": "Noodle House",
+        "freq": 0.0
+      },
+      {
+        "name": "Mediterranean Restaurant",
+        "freq": 0.0
+      },
+      {
+        "name": "Men's Store",
+        "freq": 0.0
+      },
+      {
+        "name": "Mexican Restaurant",
+        "freq": 0.0
+      },
+      {
+        "name": "Middle Eastern Restaurant",
+        "freq": 0.0
+      },
+      {
+        "name": "Miscellaneous Shop",
+        "freq": 0.0
+      },
+      {
+        "name": "Modern European Restaurant",
+        "freq": 0.0
+      },
+      {
+        "name": "Molecular Gastronomy Restaurant",
+        "freq": 0.0
+      },
+      {
+        "name": "Monument / Landmark",
+        "freq": 0.0
+      }
+    ]
+  },
+  {
+    "postcode": "M4V",
+    "borough": "Central Toronto",
+    "neighborhood": "Deer Park, Forest Hill SE, Rathnelly, South Hill, Summerhill West",
+    "lat": 43.6864123,
+    "lng": -79.4000493,
+    "cluster": 0,
+    "venues": [
+      {
+        "name": "Pub",
+        "freq": 0.13
+      },
+      {
+        "name": "Coffee Shop",
+        "freq": 0.13
+      },
+      {
+        "name": "Restaurant",
+        "freq": 0.07
+      },
+      {
+        "name": "Bagel Shop",
+        "freq": 0.07
+      },
+      {
+        "name": "Supermarket",
+        "freq": 0.07
+      },
+      {
+        "name": "Vietnamese Restaurant",
+        "freq": 0.07
+      },
+      {
+        "name": "Pizza Place",
+        "freq": 0.07
+      },
+      {
+        "name": "Liquor Store",
+        "freq": 0.07
+      },
+      {
+        "name": "American Restaurant",
+        "freq": 0.07
+      },
+      {
+        "name": "Sushi Restaurant",
+        "freq": 0.07
+      }
+    ]
+  },
+  {
+    "postcode": "M4W",
+    "borough": "Downtown Toronto",
+    "neighborhood": "Rosedale",
+    "lat": 43.6795626,
+    "lng": -79.3775294,
+    "cluster": 3,
+    "venues": [
+      {
+        "name": "Park",
+        "freq": 0.4
+      },
+      {
+        "name": "Playground",
+        "freq": 0.2
+      },
+      {
+        "name": "Trail",
+        "freq": 0.2
+      },
+      {
+        "name": "Building",
+        "freq": 0.2
+      },
+      {
+        "name": "Noodle House",
+        "freq": 0.0
+      },
+      {
+        "name": "Men's Store",
+        "freq": 0.0
+      },
+      {
+        "name": "Mexican Restaurant",
+        "freq": 0.0
+      },
+      {
+        "name": "Middle Eastern Restaurant",
+        "freq": 0.0
+      },
+      {
+        "name": "Miscellaneous Shop",
+        "freq": 0.0
+      },
+      {
+        "name": "Modern European Restaurant",
+        "freq": 0.0
+      }
+    ]
+  },
+  {
+    "postcode": "M4X",
+    "borough": "Downtown Toronto",
+    "neighborhood": "Cabbagetown, St. James Town",
+    "lat": 43.667967,
+    "lng": -79.3676753,
+    "cluster": 0,
+    "venues": [
+      {
+        "name": "Coffee Shop",
+        "freq": 0.07
+      },
+      {
+        "name": "Convenience Store",
+        "freq": 0.04
+      },
+      {
+        "name": "Pizza Place",
+        "freq": 0.04
+      },
+      {
+        "name": "Pub",
+        "freq": 0.04
+      },
+      {
+        "name": "Italian Restaurant",
+        "freq": 0.04
+      },
+      {
+        "name": "Bakery",
+        "freq": 0.04
+      },
+      {
+        "name": "Park",
+        "freq": 0.04
+      },
+      {
+        "name": "Restaurant",
+        "freq": 0.04
+      },
+      {
+        "name": "Chinese Restaurant",
+        "freq": 0.04
+      },
+      {
+        "name": "Flower Shop",
+        "freq": 0.04
+      }
+    ]
+  },
+  {
+    "postcode": "M4Y",
+    "borough": "Downtown Toronto",
+    "neighborhood": "Church and Wellesley",
+    "lat": 43.6658599,
+    "lng": -79.3831599,
+    "cluster": 0,
+    "venues": [
+      {
+        "name": "Coffee Shop",
+        "freq": 0.09
+      },
+      {
+        "name": "Japanese Restaurant",
+        "freq": 0.05
+      },
+      {
+        "name": "Gay Bar",
+        "freq": 0.05
+      },
+      {
+        "name": "Sushi Restaurant",
+        "freq": 0.04
+      },
+      {
+        "name": "Restaurant",
+        "freq": 0.03
+      },
+      {
+        "name": "Burger Joint",
+        "freq": 0.02
+      },
+      {
+        "name": "Mediterranean Restaurant",
+        "freq": 0.02
+      },
+      {
+        "name": "Pub",
+        "freq": 0.02
+      },
+      {
+        "name": "Caf\u00e9",
+        "freq": 0.02
+      },
+      {
+        "name": "Fast Food Restaurant",
+        "freq": 0.02
+      }
+    ]
+  },
+  {
+    "postcode": "M5A",
+    "borough": "Downtown Toronto",
+    "neighborhood": "Harbourfront, Regent Park",
+    "lat": 43.6542599,
+    "lng": -79.3606359,
+    "cluster": 0,
+    "venues": [
+      {
+        "name": "Coffee Shop",
+        "freq": 0.17
+      },
+      {
+        "name": "Park",
+        "freq": 0.06
+      },
+      {
+        "name": "Caf\u00e9",
+        "freq": 0.06
+      },
+      {
+        "name": "Bakery",
+        "freq": 0.06
+      },
+      {
+        "name": "Pub",
+        "freq": 0.06
+      },
+      {
+        "name": "Gym / Fitness Center",
+        "freq": 0.04
+      },
+      {
+        "name": "Mexican Restaurant",
+        "freq": 0.04
+      },
+      {
+        "name": "Breakfast Spot",
+        "freq": 0.04
+      },
+      {
+        "name": "Restaurant",
+        "freq": 0.04
+      },
+      {
+        "name": "Theater",
+        "freq": 0.04
+      }
+    ]
+  },
+  {
+    "postcode": "M5B",
+    "borough": "Downtown Toronto",
+    "neighborhood": "Ryerson, Garden District",
+    "lat": 43.6571618,
+    "lng": -79.3789371,
+    "cluster": 0,
+    "venues": [
+      {
+        "name": "Coffee Shop",
+        "freq": 0.08
+      },
+      {
+        "name": "Clothing Store",
+        "freq": 0.08
+      },
+      {
+        "name": "Middle Eastern Restaurant",
+        "freq": 0.03
+      },
+      {
+        "name": "Cosmetics Shop",
+        "freq": 0.03
+      },
+      {
+        "name": "Caf\u00e9",
+        "freq": 0.03
+      },
+      {
+        "name": "Restaurant",
+        "freq": 0.02
+      },
+      {
+        "name": "Bakery",
+        "freq": 0.02
+      },
+      {
+        "name": "Fast Food Restaurant",
+        "freq": 0.02
+      },
+      {
+        "name": "Pizza Place",
+        "freq": 0.02
+      },
+      {
+        "name": "Plaza",
+        "freq": 0.02
+      }
+    ]
+  },
+  {
+    "postcode": "M5C",
+    "borough": "Downtown Toronto",
+    "neighborhood": "St. James Town",
+    "lat": 43.6514939,
+    "lng": -79.3754179,
+    "cluster": 0,
+    "venues": [
+      {
+        "name": "Coffee Shop",
+        "freq": 0.07
+      },
+      {
+        "name": "Caf\u00e9",
+        "freq": 0.06
+      },
+      {
+        "name": "Restaurant",
+        "freq": 0.05
+      },
+      {
+        "name": "Hotel",
+        "freq": 0.05
+      },
+      {
+        "name": "Italian Restaurant",
+        "freq": 0.04
+      },
+      {
+        "name": "Bakery",
+        "freq": 0.03
+      },
+      {
+        "name": "Gastropub",
+        "freq": 0.03
+      },
+      {
+        "name": "Breakfast Spot",
+        "freq": 0.03
+      },
+      {
+        "name": "Cosmetics Shop",
+        "freq": 0.03
+      },
+      {
+        "name": "Beer Bar",
+        "freq": 0.03
+      }
+    ]
+  },
+  {
+    "postcode": "M5E",
+    "borough": "Downtown Toronto",
+    "neighborhood": "Berczy Park",
+    "lat": 43.6447708,
+    "lng": -79.3733064,
+    "cluster": 0,
+    "venues": [
+      {
+        "name": "Coffee Shop",
+        "freq": 0.07
+      },
+      {
+        "name": "Cocktail Bar",
+        "freq": 0.05
+      },
+      {
+        "name": "Bakery",
+        "freq": 0.04
+      },
+      {
+        "name": "Seafood Restaurant",
+        "freq": 0.04
+      },
+      {
+        "name": "Cheese Shop",
+        "freq": 0.04
+      },
+      {
+        "name": "Caf\u00e9",
+        "freq": 0.04
+      },
+      {
+        "name": "Steakhouse",
+        "freq": 0.04
+      },
+      {
+        "name": "Beer Bar",
+        "freq": 0.04
+      },
+      {
+        "name": "Italian Restaurant",
+        "freq": 0.04
+      },
+      {
+        "name": "Farmers Market",
+        "freq": 0.04
+      }
+    ]
+  },
+  {
+    "postcode": "M5G",
+    "borough": "Downtown Toronto",
+    "neighborhood": "Central Bay Street",
+    "lat": 43.6579524,
+    "lng": -79.3873826,
+    "cluster": 0,
+    "venues": [
+      {
+        "name": "Coffee Shop",
+        "freq": 0.14
+      },
+      {
+        "name": "Italian Restaurant",
+        "freq": 0.05
+      },
+      {
+        "name": "Caf\u00e9",
+        "freq": 0.05
+      },
+      {
+        "name": "Burger Joint",
+        "freq": 0.04
+      },
+      {
+        "name": "Ice Cream Shop",
+        "freq": 0.04
+      },
+      {
+        "name": "Sandwich Place",
+        "freq": 0.04
+      },
+      {
+        "name": "Middle Eastern Restaurant",
+        "freq": 0.04
+      },
+      {
+        "name": "Spa",
+        "freq": 0.02
+      },
+      {
+        "name": "Chinese Restaurant",
+        "freq": 0.02
+      },
+      {
+        "name": "Salad Place",
+        "freq": 0.02
+      }
+    ]
+  },
+  {
+    "postcode": "M5H",
+    "borough": "Downtown Toronto",
+    "neighborhood": "Adelaide, King, Richmond",
+    "lat": 43.6505712,
+    "lng": -79.3845675,
+    "cluster": 0,
+    "venues": [
+      {
+        "name": "Coffee Shop",
+        "freq": 0.08
+      },
+      {
+        "name": "Caf\u00e9",
+        "freq": 0.05
+      },
+      {
+        "name": "Bar",
+        "freq": 0.04
+      },
+      {
+        "name": "Steakhouse",
+        "freq": 0.04
+      },
+      {
+        "name": "Restaurant",
+        "freq": 0.03
+      },
+      {
+        "name": "Thai Restaurant",
+        "freq": 0.03
+      },
+      {
+        "name": "Hotel",
+        "freq": 0.03
+      },
+      {
+        "name": "American Restaurant",
+        "freq": 0.03
+      },
+      {
+        "name": "Cosmetics Shop",
+        "freq": 0.03
+      },
+      {
+        "name": "Burger Joint",
+        "freq": 0.03
+      }
+    ]
+  },
+  {
+    "postcode": "M5J",
+    "borough": "Downtown Toronto",
+    "neighborhood": "Harbourfront East, Toronto Islands, Union Station",
+    "lat": 43.6408157,
+    "lng": -79.3817523,
+    "cluster": 0,
+    "venues": [
+      {
+        "name": "Coffee Shop",
+        "freq": 0.13
+      },
+      {
+        "name": "Hotel",
+        "freq": 0.05
+      },
+      {
+        "name": "Aquarium",
+        "freq": 0.05
+      },
+      {
+        "name": "Caf\u00e9",
+        "freq": 0.04
+      },
+      {
+        "name": "Brewery",
+        "freq": 0.03
+      },
+      {
+        "name": "Scenic Lookout",
+        "freq": 0.03
+      },
+      {
+        "name": "Fried Chicken Joint",
+        "freq": 0.03
+      },
+      {
+        "name": "Italian Restaurant",
+        "freq": 0.02
+      },
+      {
+        "name": "Park",
+        "freq": 0.02
+      },
+      {
+        "name": "Sporting Goods Shop",
+        "freq": 0.02
+      }
+    ]
+  },
+  {
+    "postcode": "M5K",
+    "borough": "Downtown Toronto",
+    "neighborhood": "Design Exchange, Toronto Dominion Centre",
+    "lat": 43.6471768,
+    "lng": -79.3815764,
+    "cluster": 0,
+    "venues": [
+      {
+        "name": "Coffee Shop",
+        "freq": 0.12
+      },
+      {
+        "name": "Caf\u00e9",
+        "freq": 0.08
+      },
+      {
+        "name": "Hotel",
+        "freq": 0.06
+      },
+      {
+        "name": "Restaurant",
+        "freq": 0.05
+      },
+      {
+        "name": "American Restaurant",
+        "freq": 0.03
+      },
+      {
+        "name": "Bar",
+        "freq": 0.03
+      },
+      {
+        "name": "Deli / Bodega",
+        "freq": 0.03
+      },
+      {
+        "name": "Bakery",
+        "freq": 0.03
+      },
+      {
+        "name": "Italian Restaurant",
+        "freq": 0.03
+      },
+      {
+        "name": "Gastropub",
+        "freq": 0.03
+      }
+    ]
+  },
+  {
+    "postcode": "M5L",
+    "borough": "Downtown Toronto",
+    "neighborhood": "Commerce Court, Victoria Hotel",
+    "lat": 43.6481985,
+    "lng": -79.3798169,
+    "cluster": 0,
+    "venues": [
+      {
+        "name": "Coffee Shop",
+        "freq": 0.11
+      },
+      {
+        "name": "Caf\u00e9",
+        "freq": 0.06
+      },
+      {
+        "name": "Hotel",
+        "freq": 0.06
+      },
+      {
+        "name": "Restaurant",
+        "freq": 0.05
+      },
+      {
+        "name": "American Restaurant",
+        "freq": 0.04
+      },
+      {
+        "name": "Italian Restaurant",
+        "freq": 0.03
+      },
+      {
+        "name": "Seafood Restaurant",
+        "freq": 0.03
+      },
+      {
+        "name": "Deli / Bodega",
+        "freq": 0.03
+      },
+      {
+        "name": "Gym",
+        "freq": 0.03
+      },
+      {
+        "name": "Steakhouse",
+        "freq": 0.03
+      }
+    ]
+  },
+  {
+    "postcode": "M5N",
+    "borough": "Central Toronto",
+    "neighborhood": "Roselawn",
+    "lat": 43.7116948,
+    "lng": -79.4169356,
+    "cluster": 2,
+    "venues": [
+      {
+        "name": "Garden",
+        "freq": 1.0
+      },
+      {
+        "name": "Market",
+        "freq": 0.0
+      },
+      {
+        "name": "Mediterranean Restaurant",
+        "freq": 0.0
+      },
+      {
+        "name": "Men's Store",
+        "freq": 0.0
+      },
+      {
+        "name": "Mexican Restaurant",
+        "freq": 0.0
+      },
+      {
+        "name": "Middle Eastern Restaurant",
+        "freq": 0.0
+      },
+      {
+        "name": "Miscellaneous Shop",
+        "freq": 0.0
+      },
+      {
+        "name": "Modern European Restaurant",
+        "freq": 0.0
+      },
+      {
+        "name": "Molecular Gastronomy Restaurant",
+        "freq": 0.0
+      },
+      {
+        "name": "Monument / Landmark",
+        "freq": 0.0
+      }
+    ]
+  },
+  {
+    "postcode": "M5P",
+    "borough": "Central Toronto",
+    "neighborhood": "Forest Hill North, Forest Hill West",
+    "lat": 43.6969476,
+    "lng": -79.4113072,
+    "cluster": 3,
+    "venues": [
+      {
+        "name": "Trail",
+        "freq": 0.25
+      },
+      {
+        "name": "Park",
+        "freq": 0.25
+      },
+      {
+        "name": "Sushi Restaurant",
+        "freq": 0.25
+      },
+      {
+        "name": "Jewelry Store",
+        "freq": 0.25
+      },
+      {
+        "name": "New American Restaurant",
+        "freq": 0.0
+      },
+      {
+        "name": "Music Venue",
+        "freq": 0.0
+      },
+      {
+        "name": "Mediterranean Restaurant",
+        "freq": 0.0
+      },
+      {
+        "name": "Men's Store",
+        "freq": 0.0
+      },
+      {
+        "name": "Mexican Restaurant",
+        "freq": 0.0
+      },
+      {
+        "name": "Middle Eastern Restaurant",
+        "freq": 0.0
+      }
+    ]
+  },
+  {
+    "postcode": "M5R",
+    "borough": "Central Toronto",
+    "neighborhood": "The Annex, North Midtown, Yorkville",
+    "lat": 43.6727097,
+    "lng": -79.4056784,
+    "cluster": 0,
+    "venues": [
+      {
+        "name": "Sandwich Place",
+        "freq": 0.12
+      },
+      {
+        "name": "Caf\u00e9",
+        "freq": 0.12
+      },
+      {
+        "name": "Coffee Shop",
+        "freq": 0.12
+      },
+      {
+        "name": "Pizza Place",
+        "freq": 0.08
+      },
+      {
+        "name": "Indian Restaurant",
+        "freq": 0.04
+      },
+      {
+        "name": "Liquor Store",
+        "freq": 0.04
+      },
+      {
+        "name": "Jewish Restaurant",
+        "freq": 0.04
+      },
+      {
+        "name": "BBQ Joint",
+        "freq": 0.04
+      },
+      {
+        "name": "Park",
+        "freq": 0.04
+      },
+      {
+        "name": "Burger Joint",
+        "freq": 0.04
+      }
+    ]
+  },
+  {
+    "postcode": "M5S",
+    "borough": "Downtown Toronto",
+    "neighborhood": "Harbord, University of Toronto",
+    "lat": 43.6626956,
+    "lng": -79.4000493,
+    "cluster": 0,
+    "venues": [
+      {
+        "name": "Caf\u00e9",
+        "freq": 0.15
+      },
+      {
+        "name": "Bakery",
+        "freq": 0.06
+      },
+      {
+        "name": "Restaurant",
+        "freq": 0.06
+      },
+      {
+        "name": "Bookstore",
+        "freq": 0.06
+      },
+      {
+        "name": "Sandwich Place",
+        "freq": 0.06
+      },
+      {
+        "name": "Japanese Restaurant",
+        "freq": 0.06
+      },
+      {
+        "name": "Bar",
+        "freq": 0.06
+      },
+      {
+        "name": "Nightclub",
+        "freq": 0.03
+      },
+      {
+        "name": "French Restaurant",
+        "freq": 0.03
+      },
+      {
+        "name": "Noodle House",
+        "freq": 0.03
+      }
+    ]
+  },
+  {
+    "postcode": "M5T",
+    "borough": "Downtown Toronto",
+    "neighborhood": "Chinatown, Grange Park, Kensington Market",
+    "lat": 43.6532057,
+    "lng": -79.4000493,
+    "cluster": 0,
+    "venues": [
+      {
+        "name": "Caf\u00e9",
+        "freq": 0.07
+      },
+      {
+        "name": "Vegetarian / Vegan Restaurant",
+        "freq": 0.06
+      },
+      {
+        "name": "Bar",
+        "freq": 0.05
+      },
+      {
+        "name": "Chinese Restaurant",
+        "freq": 0.04
+      },
+      {
+        "name": "Dumpling Restaurant",
+        "freq": 0.04
+      },
+      {
+        "name": "Bakery",
+        "freq": 0.04
+      },
+      {
+        "name": "Mexican Restaurant",
+        "freq": 0.04
+      },
+      {
+        "name": "Vietnamese Restaurant",
+        "freq": 0.04
+      },
+      {
+        "name": "Coffee Shop",
+        "freq": 0.03
+      },
+      {
+        "name": "Comfort Food Restaurant",
+        "freq": 0.02
+      }
+    ]
+  },
+  {
+    "postcode": "M5V",
+    "borough": "Downtown Toronto",
+    "neighborhood": "CN Tower, Bathurst Quay, Island airport, Harbourfront West, King and Spadina, Railway Lands, South Niagara",
+    "lat": 43.6289467,
+    "lng": -79.3944199,
+    "cluster": 0,
+    "venues": [
+      {
+        "name": "Airport Service",
+        "freq": 0.18
+      },
+      {
+        "name": "Airport Lounge",
+        "freq": 0.12
+      },
+      {
+        "name": "Airport Terminal",
+        "freq": 0.12
+      },
+      {
+        "name": "Coffee Shop",
+        "freq": 0.06
+      },
+      {
+        "name": "Plane",
+        "freq": 0.06
+      },
+      {
+        "name": "Sculpture Garden",
+        "freq": 0.06
+      },
+      {
+        "name": "Boat or Ferry",
+        "freq": 0.06
+      },
+      {
+        "name": "Harbor / Marina",
+        "freq": 0.06
+      },
+      {
+        "name": "Boutique",
+        "freq": 0.06
+      },
+      {
+        "name": "Airport Gate",
+        "freq": 0.06
+      }
+    ]
+  },
+  {
+    "postcode": "M5W",
+    "borough": "Downtown Toronto",
+    "neighborhood": "Stn A PO Boxes 25 The Esplanade",
+    "lat": 43.6464352,
+    "lng": -79.374846,
+    "cluster": 0,
+    "venues": [
+      {
+        "name": "Coffee Shop",
+        "freq": 0.11
+      },
+      {
+        "name": "Restaurant",
+        "freq": 0.04
+      },
+      {
+        "name": "Caf\u00e9",
+        "freq": 0.04
+      },
+      {
+        "name": "Italian Restaurant",
+        "freq": 0.04
+      },
+      {
+        "name": "Cocktail Bar",
+        "freq": 0.03
+      },
+      {
+        "name": "Beer Bar",
+        "freq": 0.03
+      },
+      {
+        "name": "Seafood Restaurant",
+        "freq": 0.03
+      },
+      {
+        "name": "Hotel",
+        "freq": 0.03
+      },
+      {
+        "name": "Fast Food Restaurant",
+        "freq": 0.02
+      },
+      {
+        "name": "Gym",
+        "freq": 0.02
+      }
+    ]
+  },
+  {
+    "postcode": "M5X",
+    "borough": "Downtown Toronto",
+    "neighborhood": "First Canadian Place, Underground city",
+    "lat": 43.6484292,
+    "lng": -79.3822802,
+    "cluster": 0,
+    "venues": [
+      {
+        "name": "Coffee Shop",
+        "freq": 0.1
+      },
+      {
+        "name": "Caf\u00e9",
+        "freq": 0.08
+      },
+      {
+        "name": "Hotel",
+        "freq": 0.05
+      },
+      {
+        "name": "Steakhouse",
+        "freq": 0.04
+      },
+      {
+        "name": "Restaurant",
+        "freq": 0.04
+      },
+      {
+        "name": "Bar",
+        "freq": 0.03
+      },
+      {
+        "name": "Seafood Restaurant",
+        "freq": 0.03
+      },
+      {
+        "name": "Gym",
+        "freq": 0.03
+      },
+      {
+        "name": "Asian Restaurant",
+        "freq": 0.03
+      },
+      {
+        "name": "Burger Joint",
+        "freq": 0.03
+      }
+    ]
+  },
+  {
+    "postcode": "M6G",
+    "borough": "Downtown Toronto",
+    "neighborhood": "Christie",
+    "lat": 43.669542,
+    "lng": -79.4225637,
+    "cluster": 0,
+    "venues": [
+      {
+        "name": "Caf\u00e9",
+        "freq": 0.19
+      },
+      {
+        "name": "Grocery Store",
+        "freq": 0.19
+      },
+      {
+        "name": "Park",
+        "freq": 0.12
+      },
+      {
+        "name": "Restaurant",
+        "freq": 0.06
+      },
+      {
+        "name": "Convenience Store",
+        "freq": 0.06
+      },
+      {
+        "name": "Baby Store",
+        "freq": 0.06
+      },
+      {
+        "name": "Diner",
+        "freq": 0.06
+      },
+      {
+        "name": "Athletics & Sports",
+        "freq": 0.06
+      },
+      {
+        "name": "Coffee Shop",
+        "freq": 0.06
+      },
+      {
+        "name": "Nightclub",
+        "freq": 0.06
+      }
+    ]
+  },
+  {
+    "postcode": "M6H",
+    "borough": "West Toronto",
+    "neighborhood": "Dovercourt Village, Dufferin",
+    "lat": 43.6690051,
+    "lng": -79.4422593,
+    "cluster": 0,
+    "venues": [
+      {
+        "name": "Bakery",
+        "freq": 0.12
+      },
+      {
+        "name": "Pharmacy",
+        "freq": 0.12
+      },
+      {
+        "name": "Supermarket",
+        "freq": 0.12
+      },
+      {
+        "name": "Bank",
+        "freq": 0.06
+      },
+      {
+        "name": "Music Venue",
+        "freq": 0.06
+      },
+      {
+        "name": "Bar",
+        "freq": 0.06
+      },
+      {
+        "name": "Athletics & Sports",
+        "freq": 0.06
+      },
+      {
+        "name": "Caf\u00e9",
+        "freq": 0.06
+      },
+      {
+        "name": "Brazilian Restaurant",
+        "freq": 0.06
+      },
+      {
+        "name": "Smoke Shop",
+        "freq": 0.06
+      }
+    ]
+  },
+  {
+    "postcode": "M6J",
+    "borough": "West Toronto",
+    "neighborhood": "Little Portugal, Trinity",
+    "lat": 43.6479267,
+    "lng": -79.4197497,
+    "cluster": 0,
+    "venues": [
+      {
+        "name": "Bar",
+        "freq": 0.12
+      },
+      {
+        "name": "Coffee Shop",
+        "freq": 0.05
+      },
+      {
+        "name": "Asian Restaurant",
+        "freq": 0.05
+      },
+      {
+        "name": "Cocktail Bar",
+        "freq": 0.03
+      },
+      {
+        "name": "Restaurant",
+        "freq": 0.03
+      },
+      {
+        "name": "Caf\u00e9",
+        "freq": 0.03
+      },
+      {
+        "name": "Men's Store",
+        "freq": 0.03
+      },
+      {
+        "name": "Pizza Place",
+        "freq": 0.03
+      },
+      {
+        "name": "French Restaurant",
+        "freq": 0.03
+      },
+      {
+        "name": "Boutique",
+        "freq": 0.03
+      }
+    ]
+  },
+  {
+    "postcode": "M6K",
+    "borough": "West Toronto",
+    "neighborhood": "Brockton, Exhibition Place, Parkdale Village",
+    "lat": 43.6368472,
+    "lng": -79.4281914,
+    "cluster": 0,
+    "venues": [
+      {
+        "name": "Breakfast Spot",
+        "freq": 0.09
+      },
+      {
+        "name": "Coffee Shop",
+        "freq": 0.09
+      },
+      {
+        "name": "Caf\u00e9",
+        "freq": 0.09
+      },
+      {
+        "name": "Performing Arts Venue",
+        "freq": 0.09
+      },
+      {
+        "name": "Climbing Gym",
+        "freq": 0.05
+      },
+      {
+        "name": "Gym",
+        "freq": 0.05
+      },
+      {
+        "name": "Restaurant",
+        "freq": 0.05
+      },
+      {
+        "name": "Furniture / Home Store",
+        "freq": 0.05
+      },
+      {
+        "name": "Grocery Store",
+        "freq": 0.05
+      },
+      {
+        "name": "Italian Restaurant",
+        "freq": 0.05
+      }
+    ]
+  },
+  {
+    "postcode": "M6P",
+    "borough": "West Toronto",
+    "neighborhood": "High Park, The Junction South",
+    "lat": 43.6616083,
+    "lng": -79.4647633,
+    "cluster": 0,
+    "venues": [
+      {
+        "name": "Mexican Restaurant",
+        "freq": 0.09
+      },
+      {
+        "name": "Caf\u00e9",
+        "freq": 0.09
+      },
+      {
+        "name": "Grocery Store",
+        "freq": 0.05
+      },
+      {
+        "name": "Flea Market",
+        "freq": 0.05
+      },
+      {
+        "name": "Speakeasy",
+        "freq": 0.05
+      },
+      {
+        "name": "Fried Chicken Joint",
+        "freq": 0.05
+      },
+      {
+        "name": "Cajun / Creole Restaurant",
+        "freq": 0.05
+      },
+      {
+        "name": "Furniture / Home Store",
+        "freq": 0.05
+      },
+      {
+        "name": "Fast Food Restaurant",
+        "freq": 0.05
+      },
+      {
+        "name": "Gastropub",
+        "freq": 0.05
+      }
+    ]
+  },
+  {
+    "postcode": "M6R",
+    "borough": "West Toronto",
+    "neighborhood": "Parkdale, Roncesvalles",
+    "lat": 43.6489597,
+    "lng": -79.456325,
+    "cluster": 0,
+    "venues": [
+      {
+        "name": "Breakfast Spot",
+        "freq": 0.13
+      },
+      {
+        "name": "Gift Shop",
+        "freq": 0.13
+      },
+      {
+        "name": "Bookstore",
+        "freq": 0.07
+      },
+      {
+        "name": "Coffee Shop",
+        "freq": 0.07
+      },
+      {
+        "name": "Eastern European Restaurant",
+        "freq": 0.07
+      },
+      {
+        "name": "Dog Run",
+        "freq": 0.07
+      },
+      {
+        "name": "Restaurant",
+        "freq": 0.07
+      },
+      {
+        "name": "Bank",
+        "freq": 0.07
+      },
+      {
+        "name": "Italian Restaurant",
+        "freq": 0.07
+      },
+      {
+        "name": "Movie Theater",
+        "freq": 0.07
+      }
+    ]
+  },
+  {
+    "postcode": "M6S",
+    "borough": "West Toronto",
+    "neighborhood": "Runnymede, Swansea",
+    "lat": 43.6515706,
+    "lng": -79.4844499,
+    "cluster": 0,
+    "venues": [
+      {
+        "name": "Caf\u00e9",
+        "freq": 0.08
+      },
+      {
+        "name": "Coffee Shop",
+        "freq": 0.08
+      },
+      {
+        "name": "Sushi Restaurant",
+        "freq": 0.08
+      },
+      {
+        "name": "Pizza Place",
+        "freq": 0.05
+      },
+      {
+        "name": "Italian Restaurant",
+        "freq": 0.05
+      },
+      {
+        "name": "Bookstore",
+        "freq": 0.03
+      },
+      {
+        "name": "Bar",
+        "freq": 0.03
+      },
+      {
+        "name": "Gastropub",
+        "freq": 0.03
+      },
+      {
+        "name": "Falafel Restaurant",
+        "freq": 0.03
+      },
+      {
+        "name": "Restaurant",
+        "freq": 0.03
+      }
+    ]
+  },
+  {
+    "postcode": "M7Y",
+    "borough": "East Toronto",
+    "neighborhood": "Business Reply Mail Processing Centre 969 Eastern",
+    "lat": 43.6627439,
+    "lng": -79.321558,
+    "cluster": 0,
+    "venues": [
+      {
+        "name": "Light Rail Station",
+        "freq": 0.11
+      },
+      {
+        "name": "Yoga Studio",
+        "freq": 0.05
+      },
+      {
+        "name": "Spa",
+        "freq": 0.05
+      },
+      {
+        "name": "Gym / Fitness Center",
+        "freq": 0.05
+      },
+      {
+        "name": "Garden Center",
+        "freq": 0.05
+      },
+      {
+        "name": "Garden",
+        "freq": 0.05
+      },
+      {
+        "name": "Fast Food Restaurant",
+        "freq": 0.05
+      },
+      {
+        "name": "Farmers Market",
+        "freq": 0.05
+      },
+      {
+        "name": "Park",
+        "freq": 0.05
+      },
+      {
+        "name": "Pizza Place",
+        "freq": 0.05
+      }
+    ]
+  }
+]
