@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Toronto Neighborhood Clusters</title>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+  integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+  integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+<script src="https://cdn.plot.ly/plotly-2.35.2.min.js" charset="utf-8"></script>
+<style>
+  :root {
+    --bg: #0f172a; --panel: #1e293b; --panel2: #273449; --text: #e2e8f0;
+    --muted: #94a3b8; --border: #334155; --accent: #38bdf8;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
+    Roboto, Helvetica, Arial, sans-serif; background: var(--bg); color: var(--text); }
+  header { padding: 18px 24px; border-bottom: 1px solid var(--border);
+    background: linear-gradient(90deg, #0f172a, #1e293b); }
+  header h1 { margin: 0; font-size: 20px; }
+  header p { margin: 4px 0 0; color: var(--muted); font-size: 13px; }
+  .stats { display: flex; gap: 10px; margin-top: 12px; flex-wrap: wrap; }
+  .stat { background: var(--panel); border: 1px solid var(--border);
+    border-radius: 8px; padding: 8px 14px; min-width: 92px; }
+  .stat .n { font-size: 20px; font-weight: 700; color: var(--accent); }
+  .stat .l { font-size: 11px; color: var(--muted); text-transform: uppercase;
+    letter-spacing: .04em; }
+  .layout { display: grid; grid-template-columns: 320px 1fr; gap: 14px;
+    padding: 14px; align-items: start; }
+  .sidebar { display: flex; flex-direction: column; gap: 14px; }
+  .card { background: var(--panel); border: 1px solid var(--border);
+    border-radius: 10px; padding: 14px; }
+  .card h2 { margin: 0 0 10px; font-size: 13px; text-transform: uppercase;
+    letter-spacing: .05em; color: var(--muted); }
+  .legend-item { display: flex; align-items: center; gap: 10px; padding: 7px 8px;
+    border-radius: 7px; cursor: pointer; font-size: 13px; transition: background .15s; }
+  .legend-item:hover { background: var(--panel2); }
+  .legend-item.active { background: var(--panel2); outline: 1px solid var(--accent); }
+  .legend-item.dim { opacity: .4; }
+  .swatch { width: 14px; height: 14px; border-radius: 50%; flex: 0 0 auto; }
+  .legend-item .name { flex: 1; }
+  .legend-item .name small { display: block; color: var(--muted); font-size: 11px; }
+  .legend-item .cnt { color: var(--muted); font-variant-numeric: tabular-nums; }
+  select { width: 100%; padding: 8px; border-radius: 7px; background: var(--panel2);
+    color: var(--text); border: 1px solid var(--border); font-size: 13px; }
+  #map { height: 520px; border-radius: 10px; border: 1px solid var(--border); }
+  .charts { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 14px; }
+  .chart-box { background: var(--panel); border: 1px solid var(--border);
+    border-radius: 10px; padding: 8px; }
+  .detail .hood { font-size: 16px; font-weight: 700; }
+  .detail .meta { color: var(--muted); font-size: 12px; margin: 4px 0 10px; }
+  .vbar { display: flex; align-items: center; gap: 8px; margin: 5px 0; font-size: 12px; }
+  .vbar .track { flex: 1; height: 8px; background: var(--panel2); border-radius: 4px;
+    overflow: hidden; }
+  .vbar .fill { height: 100%; border-radius: 4px; }
+  .vbar .lbl { width: 130px; white-space: nowrap; overflow: hidden;
+    text-overflow: ellipsis; }
+  .vbar .pct { width: 38px; text-align: right; color: var(--muted);
+    font-variant-numeric: tabular-nums; }
+  .empty { color: var(--muted); font-size: 12px; font-style: italic; }
+  .note { font-size: 11px; color: var(--muted); line-height: 1.5; }
+  .leaflet-popup-content { font-size: 12px; }
+  a { color: var(--accent); }
+  @media (max-width: 900px) {
+    .layout { grid-template-columns: 1fr; } .charts { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+<header>
+  <h1>Toronto Neighborhood Clusters</h1>
+  <p>K-Means segmentation of 38 Toronto neighborhoods by Foursquare venue profiles
+     &middot; reconstructed from the original notebook's results</p>
+  <div class="stats" id="stats"></div>
+</header>
+
+<div class="layout">
+  <aside class="sidebar">
+    <div class="card">
+      <h2>Clusters</h2>
+      <div id="legend"></div>
+    </div>
+    <div class="card">
+      <h2>Jump to neighborhood</h2>
+      <select id="hoodSelect"></select>
+    </div>
+    <div class="card detail" id="detail">
+      <div class="empty">Click a point on the map (or pick a neighborhood) to see
+        its venue profile.</div>
+    </div>
+    <div class="card">
+      <h2>About the data</h2>
+      <p class="note">Cluster labels are the original notebook's K-Means output
+        (k=5). Venue percentages are the share of each category among a
+        neighborhood's nearby Foursquare venues. The data could not be
+        regenerated live (Wikipedia &amp; Foursquare are unreachable and the
+        Foursquare endpoint is retired), so it was reconstructed from the
+        notebook's saved cell outputs joined to
+        <code>Geospatial_Coordinates.csv</code>.</p>
+    </div>
+  </aside>
+
+  <main>
+    <div id="map"></div>
+    <div class="charts">
+      <div class="chart-box"><div id="clusterChart"></div></div>
+      <div class="chart-box"><div id="venueChart"></div></div>
+    </div>
+  </main>
+</div>
+
+<script>
+const DATA = [{"postcode": "M4E", "borough": "East Toronto", "neighborhood": "The Beaches", "lat": 43.6763574, "lng": -79.2930312, "cluster": 0, "venues": [{"name": "Health Food Store", "freq": 0.25}, {"name": "Pub", "freq": 0.25}, {"name": "Trail", "freq": 0.25}, {"name": "Noodle House", "freq": 0.0}, {"name": "Mediterranean Restaurant", "freq": 0.0}, {"name": "Men's Store", "freq": 0.0}, {"name": "Mexican Restaurant", "freq": 0.0}, {"name": "Middle Eastern Restaurant", "freq": 0.0}, {"name": "Miscellaneous Shop", "freq": 0.0}, {"name": "Modern European Restaurant", "freq": 0.0}]}, {"postcode": "M4K", "borough": "East Toronto", "neighborhood": "The Danforth West, Riverdale", "lat": 43.6795571, "lng": -79.352188, "cluster": 0, "venues": [{"name": "Greek Restaurant", "freq": 0.2}, {"name": "Coffee Shop", "freq": 0.09}, {"name": "Italian Restaurant", "freq": 0.07}, {"name": "Ice Cream Shop", "freq": 0.05}, {"name": "Bookstore", "freq": 0.05}, {"name": "Furniture / Home Store", "freq": 0.05}, {"name": "Yoga Studio", "freq": 0.02}, {"name": "Cosmetics Shop", "freq": 0.02}, {"name": "Brewery", "freq": 0.02}, {"name": "Bubble Tea Shop", "freq": 0.02}]}, {"postcode": "M4L", "borough": "East Toronto", "neighborhood": "The Beaches West, India Bazaar", "lat": 43.6689985, "lng": -79.3155716, "cluster": 0, "venues": [{"name": "Pizza Place", "freq": 0.06}, {"name": "Italian Restaurant", "freq": 0.06}, {"name": "Fish & Chips Shop", "freq": 0.06}, {"name": "Fast Food Restaurant", "freq": 0.06}, {"name": "Burger Joint", "freq": 0.06}, {"name": "Burrito Place", "freq": 0.06}, {"name": "Liquor Store", "freq": 0.06}, {"name": "Movie Theater", "freq": 0.06}, {"name": "Steakhouse", "freq": 0.06}, {"name": "Sandwich Place", "freq": 0.06}]}, {"postcode": "M4M", "borough": "East Toronto", "neighborhood": "Studio District", "lat": 43.6595255, "lng": -79.340923, "cluster": 0, "venues": [{"name": "Caf\u00e9", "freq": 0.1}, {"name": "Coffee Shop", "freq": 0.08}, {"name": "Bakery", "freq": 0.05}, {"name": "Italian Restaurant", "freq": 0.05}, {"name": "American Restaurant", "freq": 0.05}, {"name": "Yoga Studio", "freq": 0.03}, {"name": "Seafood Restaurant", "freq": 0.03}, {"name": "Stationery Store", "freq": 0.03}, {"name": "Bookstore", "freq": 0.03}, {"name": "Middle Eastern Restaurant", "freq": 0.03}]}, {"postcode": "M4N", "borough": "Central Toronto", "neighborhood": "Lawrence Park", "lat": 43.7280205, "lng": -79.3887901, "cluster": 4, "venues": [{"name": "Photography Studio", "freq": 0.25}, {"name": "Park", "freq": 0.25}, {"name": "Swim School", "freq": 0.25}, {"name": "Bus Line", "freq": 0.25}, {"name": "New American Restaurant", "freq": 0.0}, {"name": "Nightclub", "freq": 0.0}, {"name": "Men's Store", "freq": 0.0}, {"name": "Mexican Restaurant", "freq": 0.0}, {"name": "Middle Eastern Restaurant", "freq": 0.0}, {"name": "Miscellaneous Shop", "freq": 0.0}]}, {"postcode": "M4P", "borough": "Central Toronto", "neighborhood": "Davisville North", "lat": 43.7127511, "lng": -79.3901975, "cluster": 0, "venues": [{"name": "Hotel", "freq": 0.2}, {"name": "Food & Drink Shop", "freq": 0.1}, {"name": "Park", "freq": 0.1}, {"name": "Breakfast Spot", "freq": 0.1}, {"name": "Gym / Fitness Center", "freq": 0.1}, {"name": "Gym", "freq": 0.1}, {"name": "Sandwich Place", "freq": 0.1}, {"name": "Dance Studio", "freq": 0.1}, {"name": "Clothing Store", "freq": 0.1}, {"name": "Music Venue", "freq": 0.0}]}, {"postcode": "M4R", "borough": "Central Toronto", "neighborhood": "North Toronto West", "lat": 43.7153834, "lng": -79.4056784, "cluster": 0, "venues": [{"name": "Coffee Shop", "freq": 0.09}, {"name": "Sporting Goods Shop", "freq": 0.09}, {"name": "Clothing Store", "freq": 0.09}, {"name": "Yoga Studio", "freq": 0.05}, {"name": "Mexican Restaurant", "freq": 0.05}, {"name": "Burger Joint", "freq": 0.05}, {"name": "Spa", "freq": 0.05}, {"name": "Caf\u00e9", "freq": 0.05}, {"name": "Salon / Barbershop", "freq": 0.05}, {"name": "Furniture / Home Store", "freq": 0.05}]}, {"postcode": "M4S", "borough": "Central Toronto", "neighborhood": "Davisville", "lat": 43.7043244, "lng": -79.3887901, "cluster": 0, "venues": [{"name": "Dessert Shop", "freq": 0.09}, {"name": "Sandwich Place", "freq": 0.09}, {"name": "Pizza Place", "freq": 0.06}, {"name": "Caf\u00e9", "freq": 0.06}, {"name": "Italian Restaurant", "freq": 0.06}, {"name": "Gym", "freq": 0.06}, {"name": "Coffee Shop", "freq": 0.06}, {"name": "Sushi Restaurant", "freq": 0.06}, {"name": "Gourmet Shop", "freq": 0.03}, {"name": "Brewery", "freq": 0.03}]}, {"postcode": "M4T", "borough": "Central Toronto", "neighborhood": "Moore Park, Summerhill East", "lat": 43.6895743, "lng": -79.3831599, "cluster": 1, "venues": [{"name": "Playground", "freq": 1.0}, {"name": "Noodle House", "freq": 0.0}, {"name": "Mediterranean Restaurant", "freq": 0.0}, {"name": "Men's Store", "freq": 0.0}, {"name": "Mexican Restaurant", "freq": 0.0}, {"name": "Middle Eastern Restaurant", "freq": 0.0}, {"name": "Miscellaneous Shop", "freq": 0.0}, {"name": "Modern European Restaurant", "freq": 0.0}, {"name": "Molecular Gastronomy Restaurant", "freq": 0.0}, {"name": "Monument / Landmark", "freq": 0.0}]}, {"postcode": "M4V", "borough": "Central Toronto", "neighborhood": "Deer Park, Forest Hill SE, Rathnelly, South Hill, Summerhill West", "lat": 43.6864123, "lng": -79.4000493, "cluster": 0, "venues": [{"name": "Pub", "freq": 0.13}, {"name": "Coffee Shop", "freq": 0.13}, {"name": "Restaurant", "freq": 0.07}, {"name": "Bagel Shop", "freq": 0.07}, {"name": "Supermarket", "freq": 0.07}, {"name": "Vietnamese Restaurant", "freq": 0.07}, {"name": "Pizza Place", "freq": 0.07}, {"name": "Liquor Store", "freq": 0.07}, {"name": "American Restaurant", "freq": 0.07}, {"name": "Sushi Restaurant", "freq": 0.07}]}, {"postcode": "M4W", "borough": "Downtown Toronto", "neighborhood": "Rosedale", "lat": 43.6795626, "lng": -79.3775294, "cluster": 3, "venues": [{"name": "Park", "freq": 0.4}, {"name": "Playground", "freq": 0.2}, {"name": "Trail", "freq": 0.2}, {"name": "Building", "freq": 0.2}, {"name": "Noodle House", "freq": 0.0}, {"name": "Men's Store", "freq": 0.0}, {"name": "Mexican Restaurant", "freq": 0.0}, {"name": "Middle Eastern Restaurant", "freq": 0.0}, {"name": "Miscellaneous Shop", "freq": 0.0}, {"name": "Modern European Restaurant", "freq": 0.0}]}, {"postcode": "M4X", "borough": "Downtown Toronto", "neighborhood": "Cabbagetown, St. James Town", "lat": 43.667967, "lng": -79.3676753, "cluster": 0, "venues": [{"name": "Coffee Shop", "freq": 0.07}, {"name": "Convenience Store", "freq": 0.04}, {"name": "Pizza Place", "freq": 0.04}, {"name": "Pub", "freq": 0.04}, {"name": "Italian Restaurant", "freq": 0.04}, {"name": "Bakery", "freq": 0.04}, {"name": "Park", "freq": 0.04}, {"name": "Restaurant", "freq": 0.04}, {"name": "Chinese Restaurant", "freq": 0.04}, {"name": "Flower Shop", "freq": 0.04}]}, {"postcode": "M4Y", "borough": "Downtown Toronto", "neighborhood": "Church and Wellesley", "lat": 43.6658599, "lng": -79.3831599, "cluster": 0, "venues": [{"name": "Coffee Shop", "freq": 0.09}, {"name": "Japanese Restaurant", "freq": 0.05}, {"name": "Gay Bar", "freq": 0.05}, {"name": "Sushi Restaurant", "freq": 0.04}, {"name": "Restaurant", "freq": 0.03}, {"name": "Burger Joint", "freq": 0.02}, {"name": "Mediterranean Restaurant", "freq": 0.02}, {"name": "Pub", "freq": 0.02}, {"name": "Caf\u00e9", "freq": 0.02}, {"name": "Fast Food Restaurant", "freq": 0.02}]}, {"postcode": "M5A", "borough": "Downtown Toronto", "neighborhood": "Harbourfront, Regent Park", "lat": 43.6542599, "lng": -79.3606359, "cluster": 0, "venues": [{"name": "Coffee Shop", "freq": 0.17}, {"name": "Park", "freq": 0.06}, {"name": "Caf\u00e9", "freq": 0.06}, {"name": "Bakery", "freq": 0.06}, {"name": "Pub", "freq": 0.06}, {"name": "Gym / Fitness Center", "freq": 0.04}, {"name": "Mexican Restaurant", "freq": 0.04}, {"name": "Breakfast Spot", "freq": 0.04}, {"name": "Restaurant", "freq": 0.04}, {"name": "Theater", "freq": 0.04}]}, {"postcode": "M5B", "borough": "Downtown Toronto", "neighborhood": "Ryerson, Garden District", "lat": 43.6571618, "lng": -79.3789371, "cluster": 0, "venues": [{"name": "Coffee Shop", "freq": 0.08}, {"name": "Clothing Store", "freq": 0.08}, {"name": "Middle Eastern Restaurant", "freq": 0.03}, {"name": "Cosmetics Shop", "freq": 0.03}, {"name": "Caf\u00e9", "freq": 0.03}, {"name": "Restaurant", "freq": 0.02}, {"name": "Bakery", "freq": 0.02}, {"name": "Fast Food Restaurant", "freq": 0.02}, {"name": "Pizza Place", "freq": 0.02}, {"name": "Plaza", "freq": 0.02}]}, {"postcode": "M5C", "borough": "Downtown Toronto", "neighborhood": "St. James Town", "lat": 43.6514939, "lng": -79.3754179, "cluster": 0, "venues": [{"name": "Coffee Shop", "freq": 0.07}, {"name": "Caf\u00e9", "freq": 0.06}, {"name": "Restaurant", "freq": 0.05}, {"name": "Hotel", "freq": 0.05}, {"name": "Italian Restaurant", "freq": 0.04}, {"name": "Bakery", "freq": 0.03}, {"name": "Gastropub", "freq": 0.03}, {"name": "Breakfast Spot", "freq": 0.03}, {"name": "Cosmetics Shop", "freq": 0.03}, {"name": "Beer Bar", "freq": 0.03}]}, {"postcode": "M5E", "borough": "Downtown Toronto", "neighborhood": "Berczy Park", "lat": 43.6447708, "lng": -79.3733064, "cluster": 0, "venues": [{"name": "Coffee Shop", "freq": 0.07}, {"name": "Cocktail Bar", "freq": 0.05}, {"name": "Bakery", "freq": 0.04}, {"name": "Seafood Restaurant", "freq": 0.04}, {"name": "Cheese Shop", "freq": 0.04}, {"name": "Caf\u00e9", "freq": 0.04}, {"name": "Steakhouse", "freq": 0.04}, {"name": "Beer Bar", "freq": 0.04}, {"name": "Italian Restaurant", "freq": 0.04}, {"name": "Farmers Market", "freq": 0.04}]}, {"postcode": "M5G", "borough": "Downtown Toronto", "neighborhood": "Central Bay Street", "lat": 43.6579524, "lng": -79.3873826, "cluster": 0, "venues": [{"name": "Coffee Shop", "freq": 0.14}, {"name": "Italian Restaurant", "freq": 0.05}, {"name": "Caf\u00e9", "freq": 0.05}, {"name": "Burger Joint", "freq": 0.04}, {"name": "Ice Cream Shop", "freq": 0.04}, {"name": "Sandwich Place", "freq": 0.04}, {"name": "Middle Eastern Restaurant", "freq": 0.04}, {"name": "Spa", "freq": 0.02}, {"name": "Chinese Restaurant", "freq": 0.02}, {"name": "Salad Place", "freq": 0.02}]}, {"postcode": "M5H", "borough": "Downtown Toronto", "neighborhood": "Adelaide, King, Richmond", "lat": 43.6505712, "lng": -79.3845675, "cluster": 0, "venues": [{"name": "Coffee Shop", "freq": 0.08}, {"name": "Caf\u00e9", "freq": 0.05}, {"name": "Bar", "freq": 0.04}, {"name": "Steakhouse", "freq": 0.04}, {"name": "Restaurant", "freq": 0.03}, {"name": "Thai Restaurant", "freq": 0.03}, {"name": "Hotel", "freq": 0.03}, {"name": "American Restaurant", "freq": 0.03}, {"name": "Cosmetics Shop", "freq": 0.03}, {"name": "Burger Joint", "freq": 0.03}]}, {"postcode": "M5J", "borough": "Downtown Toronto", "neighborhood": "Harbourfront East, Toronto Islands, Union Station", "lat": 43.6408157, "lng": -79.3817523, "cluster": 0, "venues": [{"name": "Coffee Shop", "freq": 0.13}, {"name": "Hotel", "freq": 0.05}, {"name": "Aquarium", "freq": 0.05}, {"name": "Caf\u00e9", "freq": 0.04}, {"name": "Brewery", "freq": 0.03}, {"name": "Scenic Lookout", "freq": 0.03}, {"name": "Fried Chicken Joint", "freq": 0.03}, {"name": "Italian Restaurant", "freq": 0.02}, {"name": "Park", "freq": 0.02}, {"name": "Sporting Goods Shop", "freq": 0.02}]}, {"postcode": "M5K", "borough": "Downtown Toronto", "neighborhood": "Design Exchange, Toronto Dominion Centre", "lat": 43.6471768, "lng": -79.3815764, "cluster": 0, "venues": [{"name": "Coffee Shop", "freq": 0.12}, {"name": "Caf\u00e9", "freq": 0.08}, {"name": "Hotel", "freq": 0.06}, {"name": "Restaurant", "freq": 0.05}, {"name": "American Restaurant", "freq": 0.03}, {"name": "Bar", "freq": 0.03}, {"name": "Deli / Bodega", "freq": 0.03}, {"name": "Bakery", "freq": 0.03}, {"name": "Italian Restaurant", "freq": 0.03}, {"name": "Gastropub", "freq": 0.03}]}, {"postcode": "M5L", "borough": "Downtown Toronto", "neighborhood": "Commerce Court, Victoria Hotel", "lat": 43.6481985, "lng": -79.3798169, "cluster": 0, "venues": [{"name": "Coffee Shop", "freq": 0.11}, {"name": "Caf\u00e9", "freq": 0.06}, {"name": "Hotel", "freq": 0.06}, {"name": "Restaurant", "freq": 0.05}, {"name": "American Restaurant", "freq": 0.04}, {"name": "Italian Restaurant", "freq": 0.03}, {"name": "Seafood Restaurant", "freq": 0.03}, {"name": "Deli / Bodega", "freq": 0.03}, {"name": "Gym", "freq": 0.03}, {"name": "Steakhouse", "freq": 0.03}]}, {"postcode": "M5N", "borough": "Central Toronto", "neighborhood": "Roselawn", "lat": 43.7116948, "lng": -79.4169356, "cluster": 2, "venues": [{"name": "Garden", "freq": 1.0}, {"name": "Market", "freq": 0.0}, {"name": "Mediterranean Restaurant", "freq": 0.0}, {"name": "Men's Store", "freq": 0.0}, {"name": "Mexican Restaurant", "freq": 0.0}, {"name": "Middle Eastern Restaurant", "freq": 0.0}, {"name": "Miscellaneous Shop", "freq": 0.0}, {"name": "Modern European Restaurant", "freq": 0.0}, {"name": "Molecular Gastronomy Restaurant", "freq": 0.0}, {"name": "Monument / Landmark", "freq": 0.0}]}, {"postcode": "M5P", "borough": "Central Toronto", "neighborhood": "Forest Hill North, Forest Hill West", "lat": 43.6969476, "lng": -79.4113072, "cluster": 3, "venues": [{"name": "Trail", "freq": 0.25}, {"name": "Park", "freq": 0.25}, {"name": "Sushi Restaurant", "freq": 0.25}, {"name": "Jewelry Store", "freq": 0.25}, {"name": "New American Restaurant", "freq": 0.0}, {"name": "Music Venue", "freq": 0.0}, {"name": "Mediterranean Restaurant", "freq": 0.0}, {"name": "Men's Store", "freq": 0.0}, {"name": "Mexican Restaurant", "freq": 0.0}, {"name": "Middle Eastern Restaurant", "freq": 0.0}]}, {"postcode": "M5R", "borough": "Central Toronto", "neighborhood": "The Annex, North Midtown, Yorkville", "lat": 43.6727097, "lng": -79.4056784, "cluster": 0, "venues": [{"name": "Sandwich Place", "freq": 0.12}, {"name": "Caf\u00e9", "freq": 0.12}, {"name": "Coffee Shop", "freq": 0.12}, {"name": "Pizza Place", "freq": 0.08}, {"name": "Indian Restaurant", "freq": 0.04}, {"name": "Liquor Store", "freq": 0.04}, {"name": "Jewish Restaurant", "freq": 0.04}, {"name": "BBQ Joint", "freq": 0.04}, {"name": "Park", "freq": 0.04}, {"name": "Burger Joint", "freq": 0.04}]}, {"postcode": "M5S", "borough": "Downtown Toronto", "neighborhood": "Harbord, University of Toronto", "lat": 43.6626956, "lng": -79.4000493, "cluster": 0, "venues": [{"name": "Caf\u00e9", "freq": 0.15}, {"name": "Bakery", "freq": 0.06}, {"name": "Restaurant", "freq": 0.06}, {"name": "Bookstore", "freq": 0.06}, {"name": "Sandwich Place", "freq": 0.06}, {"name": "Japanese Restaurant", "freq": 0.06}, {"name": "Bar", "freq": 0.06}, {"name": "Nightclub", "freq": 0.03}, {"name": "French Restaurant", "freq": 0.03}, {"name": "Noodle House", "freq": 0.03}]}, {"postcode": "M5T", "borough": "Downtown Toronto", "neighborhood": "Chinatown, Grange Park, Kensington Market", "lat": 43.6532057, "lng": -79.4000493, "cluster": 0, "venues": [{"name": "Caf\u00e9", "freq": 0.07}, {"name": "Vegetarian / Vegan Restaurant", "freq": 0.06}, {"name": "Bar", "freq": 0.05}, {"name": "Chinese Restaurant", "freq": 0.04}, {"name": "Dumpling Restaurant", "freq": 0.04}, {"name": "Bakery", "freq": 0.04}, {"name": "Mexican Restaurant", "freq": 0.04}, {"name": "Vietnamese Restaurant", "freq": 0.04}, {"name": "Coffee Shop", "freq": 0.03}, {"name": "Comfort Food Restaurant", "freq": 0.02}]}, {"postcode": "M5V", "borough": "Downtown Toronto", "neighborhood": "CN Tower, Bathurst Quay, Island airport, Harbourfront West, King and Spadina, Railway Lands, South Niagara", "lat": 43.6289467, "lng": -79.3944199, "cluster": 0, "venues": [{"name": "Airport Service", "freq": 0.18}, {"name": "Airport Lounge", "freq": 0.12}, {"name": "Airport Terminal", "freq": 0.12}, {"name": "Coffee Shop", "freq": 0.06}, {"name": "Plane", "freq": 0.06}, {"name": "Sculpture Garden", "freq": 0.06}, {"name": "Boat or Ferry", "freq": 0.06}, {"name": "Harbor / Marina", "freq": 0.06}, {"name": "Boutique", "freq": 0.06}, {"name": "Airport Gate", "freq": 0.06}]}, {"postcode": "M5W", "borough": "Downtown Toronto", "neighborhood": "Stn A PO Boxes 25 The Esplanade", "lat": 43.6464352, "lng": -79.374846, "cluster": 0, "venues": [{"name": "Coffee Shop", "freq": 0.11}, {"name": "Restaurant", "freq": 0.04}, {"name": "Caf\u00e9", "freq": 0.04}, {"name": "Italian Restaurant", "freq": 0.04}, {"name": "Cocktail Bar", "freq": 0.03}, {"name": "Beer Bar", "freq": 0.03}, {"name": "Seafood Restaurant", "freq": 0.03}, {"name": "Hotel", "freq": 0.03}, {"name": "Fast Food Restaurant", "freq": 0.02}, {"name": "Gym", "freq": 0.02}]}, {"postcode": "M5X", "borough": "Downtown Toronto", "neighborhood": "First Canadian Place, Underground city", "lat": 43.6484292, "lng": -79.3822802, "cluster": 0, "venues": [{"name": "Coffee Shop", "freq": 0.1}, {"name": "Caf\u00e9", "freq": 0.08}, {"name": "Hotel", "freq": 0.05}, {"name": "Steakhouse", "freq": 0.04}, {"name": "Restaurant", "freq": 0.04}, {"name": "Bar", "freq": 0.03}, {"name": "Seafood Restaurant", "freq": 0.03}, {"name": "Gym", "freq": 0.03}, {"name": "Asian Restaurant", "freq": 0.03}, {"name": "Burger Joint", "freq": 0.03}]}, {"postcode": "M6G", "borough": "Downtown Toronto", "neighborhood": "Christie", "lat": 43.669542, "lng": -79.4225637, "cluster": 0, "venues": [{"name": "Caf\u00e9", "freq": 0.19}, {"name": "Grocery Store", "freq": 0.19}, {"name": "Park", "freq": 0.12}, {"name": "Restaurant", "freq": 0.06}, {"name": "Convenience Store", "freq": 0.06}, {"name": "Baby Store", "freq": 0.06}, {"name": "Diner", "freq": 0.06}, {"name": "Athletics & Sports", "freq": 0.06}, {"name": "Coffee Shop", "freq": 0.06}, {"name": "Nightclub", "freq": 0.06}]}, {"postcode": "M6H", "borough": "West Toronto", "neighborhood": "Dovercourt Village, Dufferin", "lat": 43.6690051, "lng": -79.4422593, "cluster": 0, "venues": [{"name": "Bakery", "freq": 0.12}, {"name": "Pharmacy", "freq": 0.12}, {"name": "Supermarket", "freq": 0.12}, {"name": "Bank", "freq": 0.06}, {"name": "Music Venue", "freq": 0.06}, {"name": "Bar", "freq": 0.06}, {"name": "Athletics & Sports", "freq": 0.06}, {"name": "Caf\u00e9", "freq": 0.06}, {"name": "Brazilian Restaurant", "freq": 0.06}, {"name": "Smoke Shop", "freq": 0.06}]}, {"postcode": "M6J", "borough": "West Toronto", "neighborhood": "Little Portugal, Trinity", "lat": 43.6479267, "lng": -79.4197497, "cluster": 0, "venues": [{"name": "Bar", "freq": 0.12}, {"name": "Coffee Shop", "freq": 0.05}, {"name": "Asian Restaurant", "freq": 0.05}, {"name": "Cocktail Bar", "freq": 0.03}, {"name": "Restaurant", "freq": 0.03}, {"name": "Caf\u00e9", "freq": 0.03}, {"name": "Men's Store", "freq": 0.03}, {"name": "Pizza Place", "freq": 0.03}, {"name": "French Restaurant", "freq": 0.03}, {"name": "Boutique", "freq": 0.03}]}, {"postcode": "M6K", "borough": "West Toronto", "neighborhood": "Brockton, Exhibition Place, Parkdale Village", "lat": 43.6368472, "lng": -79.4281914, "cluster": 0, "venues": [{"name": "Breakfast Spot", "freq": 0.09}, {"name": "Coffee Shop", "freq": 0.09}, {"name": "Caf\u00e9", "freq": 0.09}, {"name": "Performing Arts Venue", "freq": 0.09}, {"name": "Climbing Gym", "freq": 0.05}, {"name": "Gym", "freq": 0.05}, {"name": "Restaurant", "freq": 0.05}, {"name": "Furniture / Home Store", "freq": 0.05}, {"name": "Grocery Store", "freq": 0.05}, {"name": "Italian Restaurant", "freq": 0.05}]}, {"postcode": "M6P", "borough": "West Toronto", "neighborhood": "High Park, The Junction South", "lat": 43.6616083, "lng": -79.4647633, "cluster": 0, "venues": [{"name": "Mexican Restaurant", "freq": 0.09}, {"name": "Caf\u00e9", "freq": 0.09}, {"name": "Grocery Store", "freq": 0.05}, {"name": "Flea Market", "freq": 0.05}, {"name": "Speakeasy", "freq": 0.05}, {"name": "Fried Chicken Joint", "freq": 0.05}, {"name": "Cajun / Creole Restaurant", "freq": 0.05}, {"name": "Furniture / Home Store", "freq": 0.05}, {"name": "Fast Food Restaurant", "freq": 0.05}, {"name": "Gastropub", "freq": 0.05}]}, {"postcode": "M6R", "borough": "West Toronto", "neighborhood": "Parkdale, Roncesvalles", "lat": 43.6489597, "lng": -79.456325, "cluster": 0, "venues": [{"name": "Breakfast Spot", "freq": 0.13}, {"name": "Gift Shop", "freq": 0.13}, {"name": "Bookstore", "freq": 0.07}, {"name": "Coffee Shop", "freq": 0.07}, {"name": "Eastern European Restaurant", "freq": 0.07}, {"name": "Dog Run", "freq": 0.07}, {"name": "Restaurant", "freq": 0.07}, {"name": "Bank", "freq": 0.07}, {"name": "Italian Restaurant", "freq": 0.07}, {"name": "Movie Theater", "freq": 0.07}]}, {"postcode": "M6S", "borough": "West Toronto", "neighborhood": "Runnymede, Swansea", "lat": 43.6515706, "lng": -79.4844499, "cluster": 0, "venues": [{"name": "Caf\u00e9", "freq": 0.08}, {"name": "Coffee Shop", "freq": 0.08}, {"name": "Sushi Restaurant", "freq": 0.08}, {"name": "Pizza Place", "freq": 0.05}, {"name": "Italian Restaurant", "freq": 0.05}, {"name": "Bookstore", "freq": 0.03}, {"name": "Bar", "freq": 0.03}, {"name": "Gastropub", "freq": 0.03}, {"name": "Falafel Restaurant", "freq": 0.03}, {"name": "Restaurant", "freq": 0.03}]}, {"postcode": "M7Y", "borough": "East Toronto", "neighborhood": "Business Reply Mail Processing Centre 969 Eastern", "lat": 43.6627439, "lng": -79.321558, "cluster": 0, "venues": [{"name": "Light Rail Station", "freq": 0.11}, {"name": "Yoga Studio", "freq": 0.05}, {"name": "Spa", "freq": 0.05}, {"name": "Gym / Fitness Center", "freq": 0.05}, {"name": "Garden Center", "freq": 0.05}, {"name": "Garden", "freq": 0.05}, {"name": "Fast Food Restaurant", "freq": 0.05}, {"name": "Farmers Market", "freq": 0.05}, {"name": "Park", "freq": 0.05}, {"name": "Pizza Place", "freq": 0.05}]}];
+
+const COLORS = ["#38bdf8", "#34d399", "#a78bfa", "#fb923c", "#f472b6"];
+
+// Build a short descriptor for each cluster from its members' top venues.
+function clusterInfo() {
+  const info = {};
+  DATA.forEach(d => {
+    (info[d.cluster] ??= { count: 0, freq: {} });
+    info[d.cluster].count++;
+    d.venues.forEach(v => {
+      if (v.freq > 0) info[d.cluster].freq[v.name] =
+        (info[d.cluster].freq[v.name] || 0) + v.freq;
+    });
+  });
+  Object.values(info).forEach(c => {
+    c.top = Object.entries(c.freq).sort((a, b) => b[1] - a[1])
+      .slice(0, 3).map(e => e[0]);
+  });
+  return info;
+}
+const CINFO = clusterInfo();
+const clusterIds = Object.keys(CINFO).map(Number).sort((a, b) => a - b);
+
+let activeCluster = null; // null = show all
+
+// ---- summary stats ----
+const boroughs = new Set(DATA.map(d => d.borough));
+const cats = new Set();
+DATA.forEach(d => d.venues.forEach(v => { if (v.freq > 0) cats.add(v.name); }));
+const stats = [
+  ["Neighborhoods", DATA.length],
+  ["Clusters", clusterIds.length],
+  ["Boroughs", boroughs.size],
+  ["Venue types", cats.size],
+];
+document.getElementById("stats").innerHTML = stats.map(
+  ([l, n]) => `<div class="stat"><div class="n">${n}</div><div class="l">${l}</div></div>`
+).join("");
+
+// ---- map ----
+const map = L.map("map").setView([43.6535, -79.3839], 12);
+L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+  maxZoom: 19, attribution: "&copy; OpenStreetMap contributors"
+}).addTo(map);
+
+const markers = DATA.map(d => {
+  const top = d.venues.filter(v => v.freq > 0).slice(0, 5)
+    .map(v => `${v.name} (${Math.round(v.freq * 100)}%)`).join("<br>");
+  const m = L.circleMarker([d.lat, d.lng], {
+    radius: 9, color: "#0f172a", weight: 1,
+    fillColor: COLORS[d.cluster], fillOpacity: 0.85,
+  }).bindPopup(
+    `<b>${d.neighborhood}</b><br><i>${d.borough}</i> &middot; Cluster ${d.cluster}` +
+    `<br><br>${top || "<i>no venues found</i>"}`
+  );
+  m.on("click", () => showDetail(d));
+  m._rec = d;
+  m.addTo(map);
+  return m;
+});
+
+// ---- legend ----
+function renderLegend() {
+  const el = document.getElementById("legend");
+  el.innerHTML = clusterIds.map(id => {
+    const c = CINFO[id];
+    const dim = activeCluster !== null && activeCluster !== id ? "dim" : "";
+    const act = activeCluster === id ? "active" : "";
+    return `<div class="legend-item ${dim} ${act}" data-c="${id}">
+      <span class="swatch" style="background:${COLORS[id]}"></span>
+      <span class="name">Cluster ${id}<small>${c.top.join(" · ") || "—"}</small></span>
+      <span class="cnt">${c.count}</span></div>`;
+  }).join("") +
+  `<div class="legend-item ${activeCluster === null ? "active" : ""}" data-c="all">
+     <span class="swatch" style="background:#64748b"></span>
+     <span class="name">Show all</span><span class="cnt">${DATA.length}</span></div>`;
+  el.querySelectorAll(".legend-item").forEach(item => {
+    item.onclick = () => {
+      const c = item.dataset.c;
+      activeCluster = (c === "all") ? null : Number(c);
+      applyFilter();
+    };
+  });
+}
+
+function applyFilter() {
+  markers.forEach(m => {
+    const show = activeCluster === null || m._rec.cluster === activeCluster;
+    if (show) m.addTo(map); else map.removeLayer(m);
+  });
+  renderLegend();
+  drawVenueChart();
+  drawClusterChart();
+}
+
+// ---- detail panel ----
+function showDetail(d) {
+  const venues = d.venues.filter(v => v.freq > 0);
+  const max = Math.max(...d.venues.map(v => v.freq), 0.01);
+  const bars = (venues.length ? venues : d.venues.slice(0, 5)).map(v => `
+    <div class="vbar">
+      <span class="lbl" title="${v.name}">${v.name}</span>
+      <span class="track"><span class="fill" style="width:${(v.freq / max) * 100}%;
+        background:${COLORS[d.cluster]}"></span></span>
+      <span class="pct">${Math.round(v.freq * 100)}%</span>
+    </div>`).join("");
+  document.getElementById("detail").innerHTML = `
+    <div class="hood">${d.neighborhood}</div>
+    <div class="meta">${d.borough} &middot; ${d.postcode} &middot;
+      <span style="color:${COLORS[d.cluster]}">&#9679;</span> Cluster ${d.cluster}</div>
+    ${bars}
+    ${venues.length ? "" : '<div class="empty">Few venues nearby — categories are tied.</div>'}`;
+}
+
+// ---- dropdown ----
+const sel = document.getElementById("hoodSelect");
+sel.innerHTML = '<option value="">Select…</option>' +
+  DATA.map((d, i) => `<option value="${i}">${d.neighborhood}</option>`).join("");
+sel.onchange = () => {
+  if (sel.value === "") return;
+  const d = DATA[+sel.value];
+  map.setView([d.lat, d.lng], 14);
+  markers[+sel.value].openPopup();
+  showDetail(d);
+};
+
+// ---- charts ----
+const PLOT_LAYOUT = {
+  paper_bgcolor: "rgba(0,0,0,0)", plot_bgcolor: "rgba(0,0,0,0)",
+  font: { color: "#e2e8f0", size: 11 }, margin: { t: 36, r: 10, b: 80, l: 110 },
+};
+const PLOT_CFG = { displayModeBar: false, responsive: true };
+
+function drawClusterChart() {
+  const x = clusterIds.map(id => "Cluster " + id);
+  const y = clusterIds.map(id => CINFO[id].count);
+  const colors = clusterIds.map(id =>
+    activeCluster === null || activeCluster === id ? COLORS[id] : "#475569");
+  Plotly.react("clusterChart", [{
+    type: "bar", x, y, marker: { color: colors },
+    hovertemplate: "%{x}: %{y} neighborhoods<extra></extra>",
+  }], { ...PLOT_LAYOUT, title: "Neighborhoods per cluster",
+        margin: { t: 36, r: 10, b: 50, l: 40 } }, PLOT_CFG);
+}
+
+function drawVenueChart() {
+  const pool = activeCluster === null ? DATA
+    : DATA.filter(d => d.cluster === activeCluster);
+  const agg = {};
+  pool.forEach(d => d.venues.forEach(v => {
+    if (v.freq > 0) agg[v.name] = (agg[v.name] || 0) + v.freq;
+  }));
+  const top = Object.entries(agg).sort((a, b) => a[1] - b[1]).slice(-15);
+  const title = activeCluster === null
+    ? "Top venue categories (all clusters)"
+    : `Top venue categories · Cluster ${activeCluster}`;
+  Plotly.react("venueChart", [{
+    type: "bar", orientation: "h",
+    y: top.map(e => e[0]), x: top.map(e => +e[1].toFixed(2)),
+    marker: { color: activeCluster === null ? "#38bdf8" : COLORS[activeCluster] },
+    hovertemplate: "%{y}: %{x}<extra></extra>",
+  }], { ...PLOT_LAYOUT, title }, PLOT_CFG);
+}
+
+renderLegend();
+drawClusterChart();
+drawVenueChart();
+</script>
+</body>
+</html>
