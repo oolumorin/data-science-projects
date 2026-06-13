@@ -1,0 +1,137 @@
+@import 'tailwindcss';
+@import 'katex/dist/katex.min.css';
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --font-sans: 'IBM Plex Sans', ui-sans-serif, system-ui, sans-serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, monospace;
+
+  /* surface scale (dark default) */
+  --color-ink-950: #0d1117;
+  --color-ink-900: #161b22;
+  --color-ink-800: #21262d;
+  --color-ink-700: #30363d;
+  --color-ink-600: #484f58;
+  --color-ink-400: #8b949e;
+  --color-ink-300: #b1bac4;
+  --color-ink-100: #e6edf3;
+
+  /* module accents — one hue per module, consistent saturation, AA on #0d1117 */
+  --color-m1: #e6edf3; /* methodology — neutral */
+  --color-m2: #f2cc60; /* python — amber */
+  --color-m3: #58a6ff; /* sql — blue */
+  --color-m4: #f0883e; /* wrangling — orange */
+  --color-m5: #39d2c0; /* eda/stats — teal */
+  --color-m6: #bc8cff; /* regression — violet */
+  --color-m7: #ff7eb6; /* dataviz — pink */
+  --color-m8: #56d364; /* ml — green */
+
+  --color-good: #56d364;
+  --color-bad: #f85149;
+  --color-warn: #f2cc60;
+}
+
+:root {
+  color-scheme: dark;
+  /* the active module sets --accent; shared components consume it */
+  --accent: var(--color-m1);
+}
+
+body {
+  @apply bg-ink-950 text-ink-100 font-sans antialiased;
+}
+
+.accent-text {
+  color: var(--accent);
+}
+.accent-bg {
+  background-color: var(--accent);
+}
+.accent-border {
+  border-color: var(--accent);
+}
+
+/* focus visibility for keyboard users */
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* range input styling */
+input[type='range'] {
+  @apply h-1.5 w-full cursor-pointer appearance-none rounded-full bg-ink-700;
+}
+input[type='range']::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 9999px;
+  background: var(--accent);
+  border: 2px solid var(--color-ink-950);
+  cursor: pointer;
+}
+input[type='range']::-moz-range-thumb {
+  width: 16px;
+  height: 16px;
+  border-radius: 9999px;
+  background: var(--accent);
+  border: 2px solid var(--color-ink-950);
+  cursor: pointer;
+}
+
+/* prism syntax theme tuned to the ink palette */
+code[class*='language-'],
+pre[class*='language-'] {
+  @apply font-mono text-[13px] leading-relaxed;
+  color: var(--color-ink-100);
+  tab-size: 4;
+  hyphens: none;
+  white-space: pre;
+}
+.token.comment {
+  color: var(--color-ink-400);
+  font-style: italic;
+}
+.token.string,
+.token.char,
+.token.triple-quoted-string {
+  color: #a5d6ff;
+}
+.token.keyword,
+.token.boolean {
+  color: #ff7b72;
+}
+.token.number {
+  color: #79c0ff;
+}
+.token.function,
+.token.class-name {
+  color: #d2a8ff;
+}
+.token.operator,
+.token.punctuation {
+  color: var(--color-ink-300);
+}
+.token.builtin,
+.token.decorator {
+  color: #ffa657;
+}
+
+/* KaTeX sizing on dark */
+.katex {
+  font-size: 1.05em;
+}
+
+/* respect reduced motion globally */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
