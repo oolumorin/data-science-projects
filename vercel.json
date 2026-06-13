@@ -1,0 +1,7 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "installCommand": "cd ds-refresher && npm install",
+  "buildCommand": "cd ds-refresher && npm run build",
+  "outputDirectory": "ds-refresher/dist",
+  "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }]
+}
