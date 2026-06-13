@@ -1,0 +1,4 @@
+__pycache__/
+*.pyc
+data/refresher.db
+.ipynb_checkpoints/

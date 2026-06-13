@@ -1,0 +1,8 @@
+# Data Science Refresher — pinned to known-good lower bounds.
+# Install with:  pip install -r requirements.txt
+streamlit>=1.36
+pandas>=2.2
+numpy>=1.26
+scikit-learn>=1.4
+matplotlib>=3.8
+plotly>=5.22
