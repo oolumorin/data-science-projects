@@ -10,7 +10,7 @@ interface Stage {
   loopBack: number[]
 }
 
-export const STAGES: Stage[] = [
+const STAGES: Stage[] = [
   {
     name: 'Business Understanding',
     short: 'Business',

@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { useReducedMotion } from '../hooks/useReducedMotion'
 
 interface StepPlayerProps {
@@ -31,31 +31,25 @@ export function StepPlayer({
   const [playing, setPlaying] = useState(false)
   const [speed, setSpeed] = useState(1)
   const reduced = useReducedMotion()
-  const stepRef = useRef(step)
-  stepRef.current = step
 
   const atEnd = step >= totalSteps - 1
 
+  // Drive the timer off the current `step`: each advance re-arms a fresh
+  // timeout, so there's no ref-during-render and no stale closure. At the end
+  // we either stop (stopAtEnd) or loop, handled inside the timeout callback.
   useEffect(() => {
     if (!playing) return
-    if (stopAtEnd && atEnd) {
-      setPlaying(false)
-      return
-    }
-    const interval = setInterval(() => {
-      const next = stepRef.current + 1
+    const id = setTimeout(() => {
+      const next = step + 1
       if (next >= totalSteps) {
-        if (stopAtEnd) {
-          setPlaying(false)
-        } else {
-          onStepChange(0)
-        }
-        return
+        if (stopAtEnd) setPlaying(false)
+        else onStepChange(0)
+      } else {
+        onStepChange(next)
       }
-      onStepChange(next)
     }, stepDuration / speed)
-    return () => clearInterval(interval)
-  }, [playing, speed, stepDuration, totalSteps, stopAtEnd, atEnd, onStepChange])
+    return () => clearTimeout(id)
+  }, [playing, speed, stepDuration, totalSteps, stopAtEnd, step, onStepChange])
 
   const btn =
     'rounded-md border border-ink-700 px-2.5 py-1 font-mono text-xs text-ink-300 transition-colors hover:border-ink-600 hover:text-ink-100 disabled:opacity-40 disabled:hover:border-ink-700 disabled:hover:text-ink-300'
